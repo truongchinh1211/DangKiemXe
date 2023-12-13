@@ -52,6 +52,7 @@ public class TransportationGUI extends javax.swing.JPanel {
         ownerInfo = new customDialog(parentFrame);
         ownerInfo.setDialogContent(ownerPanel);
         getTranportationData();
+        getTransportationTypeData();
     }
     public void getTranportationData(){
         DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -65,7 +66,7 @@ public class TransportationGUI extends javax.swing.JPanel {
     }
     public void getTransportationDetail(Transportation transportation){
         if(transportation!=null){
-            getTransportationTypeData();
+            
             nameTxt.setText(transportation.getName());
             yearTxt.setText(transportation.getYear()+"");
             typeCb.setSelectedItem(transportation.getTransportationType().getName());
@@ -99,7 +100,6 @@ public class TransportationGUI extends javax.swing.JPanel {
     public void refresh(){
         nameTxt.setText("");
         yearTxt.setText("");
-        typeCb.setModel(null);
         licensePlateTxt.setText("");
         cmndTxt.setText("");
         descriptionTxt.setText("");
