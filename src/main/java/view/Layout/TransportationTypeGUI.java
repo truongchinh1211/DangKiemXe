@@ -79,7 +79,7 @@ public class TransportationTypeGUI extends javax.swing.JPanel {
         roundPanel3 = new view.custom.RoundPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
-        jTextField3 = new javax.swing.JTextField();
+        searchTxt = new javax.swing.JTextField();
         search = new view.custom.Button();
         roundPanel4 = new view.custom.RoundPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -154,7 +154,7 @@ public class TransportationTypeGUI extends javax.swing.JPanel {
                 .addGroup(roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
                     .addGroup(roundPanel3Layout.createSequentialGroup()
-                        .addComponent(jTextField3)
+                        .addComponent(searchTxt)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)))
@@ -165,7 +165,7 @@ public class TransportationTypeGUI extends javax.swing.JPanel {
             .addGroup(roundPanel3Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
@@ -448,7 +448,8 @@ public class TransportationTypeGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_button7ActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-        List<TransportationType> transportationTypes = transportationTypeBUS.getByNameKeyword(search.getText());
+        String keyword = searchTxt.getText();
+        List<TransportationType> transportationTypes = transportationTypeBUS.getByNameKeyword(keyword);
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
         int i=0;
@@ -468,7 +469,6 @@ public class TransportationTypeGUI extends javax.swing.JPanel {
     private javax.swing.JPanel contentPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel lblCategoryIDConfig;
     private javax.swing.JLabel lblCategoryIDConfig1;
     private javax.swing.JLabel lblCategoryIDConfig2;
@@ -476,6 +476,7 @@ public class TransportationTypeGUI extends javax.swing.JPanel {
     private view.custom.RoundPanel roundPanel3;
     private view.custom.RoundPanel roundPanel4;
     private view.custom.Button search;
+    private javax.swing.JTextField searchTxt;
     private javax.swing.JTable table;
     private javax.swing.JTextField typeTxt;
     // End of variables declaration//GEN-END:variables
