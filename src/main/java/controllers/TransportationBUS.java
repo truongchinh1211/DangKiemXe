@@ -39,6 +39,7 @@ public class TransportationBUS {
         try{
             return transportationDAO.getByOwnerCMNDKeyword(keyword);
         }catch(Exception e){
+            e.printStackTrace();
             return null;
         }
     }

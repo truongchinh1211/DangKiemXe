@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import com.mongodb.diagnostics.logging.Logger;
 import config.MongoConnection;
 import dev.morphia.Datastore;
 import dev.morphia.query.experimental.filters.Filters;
@@ -38,7 +39,7 @@ public class TransportationDAO {
     public List<Transportation> getByOwnerCMNDKeyword(String keyword) throws Exception{
         String regexPattern = ".*" + Pattern.quote(keyword) + ".*";
         return datastore.find(Transportation.class)
-        .filter(Transportation.OWNER_FIELD,Pattern.compile(regexPattern)).iterator().toList();
+        .field(Transportation.OWNER_FIELD).containsIgnoreCase(keyword).iterator().toList();
     }
     public void save(Transportation transportation) throws Exception{
         datastore.save(transportation);

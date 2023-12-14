@@ -763,15 +763,14 @@ public class TransportationGUI extends javax.swing.JPanel {
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
         String keyword = search.getText();
         List<Transportation> transportations;
-        if(filter.getSelectedIndex()==0){
+        if(filter.getSelectedIndex()==0)
             transportations = transportationBUS.getByNameKeyword(keyword);
-        }
-        else{
+        else 
             transportations = transportationBUS.getByOwnerCMNDKeyword(keyword);
-        }
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
         int i=0;
+        if(transportations!=null)
         for(Transportation transportation: transportations){
             Object[] row = new Object[]{++i,transportation.getName(),transportation.getLicensePlate(),transportation.getOwner(),transportation.getId()};
             model.addRow(row);
