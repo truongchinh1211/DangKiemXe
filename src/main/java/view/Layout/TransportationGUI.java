@@ -141,6 +141,7 @@ public class TransportationGUI extends javax.swing.JPanel {
         table = new javax.swing.JTable();
         search = new javax.swing.JTextField();
         button3 = new view.custom.Button();
+        filter = new javax.swing.JComboBox<>();
         roundPanel4 = new view.custom.RoundPanel();
         jPanel3 = new javax.swing.JPanel();
         lblCategoryIDConfig = new javax.swing.JLabel();
@@ -319,6 +320,8 @@ public class TransportationGUI extends javax.swing.JPanel {
             }
         });
 
+        filter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tên xe", "Chủ sở hữu" }));
+
         javax.swing.GroupLayout roundPanel3Layout = new javax.swing.GroupLayout(roundPanel3);
         roundPanel3.setLayout(roundPanel3Layout);
         roundPanel3Layout.setHorizontalGroup(
@@ -328,7 +331,9 @@ public class TransportationGUI extends javax.swing.JPanel {
                 .addGroup(roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
                     .addGroup(roundPanel3Layout.createSequentialGroup()
-                        .addComponent(search)
+                        .addComponent(filter, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)))
@@ -338,9 +343,11 @@ public class TransportationGUI extends javax.swing.JPanel {
             roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundPanel3Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(roundPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(filter))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
                 .addContainerGap())
@@ -547,9 +554,7 @@ public class TransportationGUI extends javax.swing.JPanel {
                             .addComponent(button8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(lblCategoryIDConfig5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52))
+                    .addComponent(lblCategoryIDConfig5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -757,7 +762,13 @@ public class TransportationGUI extends javax.swing.JPanel {
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
         String keyword = search.getText();
-        List<Transportation> transportations = transportationBUS.getByNameKeyword(keyword);
+        List<Transportation> transportations;
+        if(filter.getSelectedIndex()==0){
+            transportations = transportationBUS.getByNameKeyword(keyword);
+        }
+        else{
+            transportations = transportationBUS.getByOwnerCMNDKeyword(keyword);
+        }
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
         int i=0;
@@ -781,6 +792,7 @@ public class TransportationGUI extends javax.swing.JPanel {
     private javax.swing.JTextField cmndTxt;
     private javax.swing.JPanel contentPanel2;
     private javax.swing.JTextArea descriptionTxt;
+    private javax.swing.JComboBox<String> filter;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;

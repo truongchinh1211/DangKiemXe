@@ -35,6 +35,13 @@ public class TransportationBUS {
             return null;
         }
     }
+    public List<Transportation> getByOwnerCMNDKeyword(String keyword){
+        try{
+            return transportationDAO.getByOwnerCMNDKeyword(keyword);
+        }catch(Exception e){
+            return null;
+        }
+    }
     public boolean save(Transportation transportation){
         try{
             transportationDAO.save(transportation);

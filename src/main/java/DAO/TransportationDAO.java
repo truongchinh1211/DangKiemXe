@@ -35,6 +35,11 @@ public class TransportationDAO {
         return datastore.find(Transportation.class)
         .filter(Transportation.NAME_FIELD,Pattern.compile(regexPattern)).iterator().toList();
     }
+    public List<Transportation> getByOwnerCMNDKeyword(String keyword) throws Exception{
+        String regexPattern = ".*" + Pattern.quote(keyword) + ".*";
+        return datastore.find(Transportation.class)
+        .filter(Transportation.OWNER_FIELD,Pattern.compile(regexPattern)).iterator().toList();
+    }
     public void save(Transportation transportation) throws Exception{
         datastore.save(transportation);
     }
