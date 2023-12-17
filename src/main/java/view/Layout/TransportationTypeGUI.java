@@ -376,10 +376,8 @@ public class TransportationTypeGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_tableMouseClicked
 
     private void button6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button6ActionPerformed
-        if(selectedTransportationType!=null)
-            getTransportationTypeDetail();
-        else 
-            JOptionPane.showMessageDialog(contentPanel2, "Vui lòng chọn một đối tượng để thao táo");
+        selectedTransportationType=null;
+        refresh();
     }//GEN-LAST:event_button6ActionPerformed
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed

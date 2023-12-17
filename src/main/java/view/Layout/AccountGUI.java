@@ -174,7 +174,7 @@ public class AccountGUI extends javax.swing.JPanel {
         roundPanel1 = new view.custom.RoundPanel();
         button3 = new view.custom.Button();
         searchTxt = new view.custom.textField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        filterOption = new javax.swing.JComboBox<>();
         lblCategoryIDConfig13 = new javax.swing.JLabel();
         lblCategoryIDConfig14 = new javax.swing.JLabel();
         usernameTxt = new view.custom.textField();
@@ -370,10 +370,9 @@ public class AccountGUI extends javax.swing.JPanel {
             }
         });
 
-        searchTxt.setForeground(new java.awt.Color(255, 255, 255));
         searchTxt.setLabelText("Tìm kiếm");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "username", "tên nhân viên" }));
+        filterOption.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "username", "vai trò" }));
 
         javax.swing.GroupLayout roundPanel1Layout = new javax.swing.GroupLayout(roundPanel1);
         roundPanel1.setLayout(roundPanel1Layout);
@@ -381,7 +380,7 @@ public class AccountGUI extends javax.swing.JPanel {
             roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, 0, 105, Short.MAX_VALUE)
+                .addComponent(filterOption, 0, 105, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -394,14 +393,13 @@ public class AccountGUI extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(roundPanel1Layout.createSequentialGroup()
-                        .addComponent(jComboBox1)
+                        .addComponent(filterOption)
                         .addGap(2, 2, 2))
                     .addGroup(roundPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(searchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(button3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addComponent(searchTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         lblCategoryIDConfig13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -588,11 +586,18 @@ public class AccountGUI extends javax.swing.JPanel {
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
         String keyword = searchTxt.getText();
-        List<Account> accounts = accountBUS.getAll();
+        List<Account> accounts=null;
+        if(filterOption.getSelectedIndex()==0){
+            accounts = accountBUS.getByRoleNameKeyword(keyword);
+        }else{
+             accounts = accountBUS.getByUsernameKeyword(keyword);
+         }
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        int i=0;
         for(Account account: accounts){
-            Object row[] = new Object[]{account.getName()};
+            Object[] row = new Object[]{++i,account.getUsername(),dateFormat.format(account.getCreatedDate()),account.getRole().getRoleName(),account.getId()};
             model.addRow(row);
         }
     }//GEN-LAST:event_button3ActionPerformed
@@ -685,7 +690,7 @@ public class AccountGUI extends javax.swing.JPanel {
                 selectedAccount.setPassword(password);
                 if(accountBUS.save(selectedAccount))
                     flag =1 ;
-            }
+            }else flag = 2;
         }
         
         if(flag ==1 ){
@@ -693,7 +698,7 @@ public class AccountGUI extends javax.swing.JPanel {
                 refresh();
                 selectedAccount=null;
                 getAccountsData();
-        }else {
+        }else if(flag==0){
             JOptionPane.showMessageDialog(contentPanel2, "Có lỗi xảy ra");
         }
     }//GEN-LAST:event_button5ActionPerformed
@@ -733,8 +738,8 @@ public class AccountGUI extends javax.swing.JPanel {
     private javax.swing.JPanel contentPanel2;
     private view.custom.textField emailTxt;
     private javax.swing.JRadioButton femaleOption;
+    private javax.swing.JComboBox<String> filterOption;
     private javax.swing.ButtonGroup genderOption;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;

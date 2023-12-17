@@ -30,15 +30,22 @@ public class RoleDAO {
             .filter(Filters.eq("_id", id))
             .first();
     }
+    
     public Role getByName(String name) throws Exception {
         return datastore.find(Role.class)
             .filter(Filters.eq(Role.NAME_FIELD,name))
             .first();
     }
+    public Role getByNameExcludeId(String name,ObjectId excludeId) throws Exception {
+        return datastore.find(Role.class)
+            .filter(Filters.eq(Role.NAME_FIELD,name))
+            .filter(Filters.ne("_id", excludeId))
+            .first();
+    }
     public List<Role> getByNameKeyword(String keyword) throws Exception{
         String regexPattern = ".*" + Pattern.quote(keyword) + ".*";
         return datastore.find(Role.class)
-        .filter(Role.NAME_FIELD,Pattern.compile(regexPattern)).iterator().toList();
+        .field(Role.NAME_FIELD).containsIgnoreCase(keyword).iterator().toList();
     }
     public void save(Role role) throws Exception{
         datastore.save(role);

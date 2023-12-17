@@ -4,7 +4,6 @@
  */
 package controllers;
 
-import DAO.AccountDAO;
 import DAO.RoleDAO;
 import java.util.List;
 import models.Account;
@@ -38,17 +37,25 @@ public class RoleBUS {
             return null;
         }
     }
+    public Role getByNameExcludeId(String name,ObjectId excludeId){
+        try{
+            return roleDAO.getByNameExcludeId(name,excludeId);
+        }catch(Exception e){
+            return null;
+        }
+    }
     public List<Role> getByNameKeyword(String keyword){
         try{
             return roleDAO.getByNameKeyword(keyword);
         }catch(Exception e){
+            e.printStackTrace();
             return null;
         }
     }
     
     public boolean save(Role role){
         try{
-            if(getByName(role.getRoleName())!=null)
+            if(getByNameExcludeId(role.getRoleName(),role.getId())!=null)
                 return false;
             roleDAO.save(role);
             return true;

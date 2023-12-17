@@ -417,12 +417,16 @@ public class RoleGUI extends javax.swing.JPanel {
         }
         try{
             String name = nameTxt.getText();
-            if(validateField())
+            if(!validateField())
                 return;
             Role createRole = new Role(name,ownerRole.getSelectedIndex(),transportationRole.getSelectedIndex(),transportationTypeRole.getSelectedIndex(),AccountRole.getSelectedIndex());
             if(roleBUS.save(createRole)){
                 JOptionPane.showMessageDialog(contentPanel2, "Thêm thành công");
+                refresh();
+            }else {
+                JOptionPane.showMessageDialog(contentPanel2, "Thêm thất bại!! Tên vai trò đã tồn tại");
             }
+            getRoleData();
         }catch(Exception e){
 
         }
@@ -437,10 +441,14 @@ public class RoleGUI extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(contentPanel2, "Vui lòng chọn một đối tượng thể thao tác");
             return;
         }
+        if(!validateField())
+            return;
+        String name = nameTxt.getText();
         int ownerRole = this.ownerRole.getSelectedIndex();
         int transportationRole = this.transportationRole.getSelectedIndex();
         int transportationTypeRole = this.transportationTypeRole.getSelectedIndex();
         int accountRole = AccountRole.getSelectedIndex();
+        selectedRole.setRoleName(name);
         selectedRole.setOwnerManager(ownerRole);
         selectedRole.setTransportationManager(transportationRole);
         selectedRole.setTransportationTypeManager(transportationTypeRole);
@@ -449,19 +457,15 @@ public class RoleGUI extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(contentPanel2, "Cập nhật thành công!");
             refresh();
             selectedRole=null;
-            getRoleData();
         }else {
-            JOptionPane.showMessageDialog(contentPanel2, "Có lỗi xảy ra");
+            JOptionPane.showMessageDialog(contentPanel2, "Cập nhật thất bại!! tên vai trò đã tồn tại");
         }
+        getRoleData();
     }//GEN-LAST:event_button5ActionPerformed
 
     private void button6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button6ActionPerformed
-                if(selectedRole!=null){
-                    selectedRole = roleBUS.getById(selectedRole.getId());
-                    getRoleDetail(selectedRole);
-                }
-                else
-                JOptionPane.showMessageDialog(contentPanel2, "Vui lòng chọn một đối tượng để thao táo");
+        refresh();
+        selectedRole=null;
     }//GEN-LAST:event_button6ActionPerformed
 
     private void button7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button7ActionPerformed

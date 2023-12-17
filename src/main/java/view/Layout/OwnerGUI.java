@@ -752,10 +752,8 @@ public class OwnerGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_button5ActionPerformed
 
     private void button6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button6ActionPerformed
-        if(selectedOwner!=null)
-            setOwnerDetail(selectedOwner);
-        else 
-            JOptionPane.showMessageDialog(contentPanel2, "Vui lòng chọn một đối tượng để thao tác");
+        selectedOwner=null;
+        refresh();
     }//GEN-LAST:event_button6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

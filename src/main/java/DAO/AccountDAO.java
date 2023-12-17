@@ -48,6 +48,21 @@ public class AccountDAO {
                 .filter(Filters.eq(Account.USERNAME_FIELD, username))
                 .first();
     }
+    public List<Account> getByUsernameKeyword(String keyword)throws Exception{
+        return datastore.find(Account.class)
+                .field(Account.USERNAME_FIELD).containsIgnoreCase(keyword).iterator().toList();
+    }
+    public List<Account> getByRoleNameKeyword(String keyword)throws Exception{
+        return datastore.find(Account.class)
+                .field("role").in(datastore.find(Role.class).field(Role.NAME_FIELD).containsIgnoreCase(keyword).iterator().toList())
+                .iterator().toList();
+    }
+    public Account getByUsernameExcludeId(String username,ObjectId excludeId)throws Exception{
+        return datastore.find(Account.class)
+                .filter(Filters.eq(Account.USERNAME_FIELD, username))
+                .filter(Filters.ne("_id", excludeId))
+                .first();
+    }
     
     public void save(Account account)throws Exception{
         datastore.save(account);
