@@ -50,6 +50,8 @@ public class AccountBUS {
     }
     public boolean save(Account account){
         try{
+            if(accountDAO.getByUsername(account.getUsername())!=null)
+                return false;
             account.setPassword(BCrypt.hashpw(account.getPassword(), BCrypt.gensalt()));
             accountDAO.save(account);
             return true;
@@ -57,8 +59,10 @@ public class AccountBUS {
             return false;
         }
     }
-    public boolean update(Account account){
+    public boolean updateWithoutChangePassword(Account account){
         try{
+            if(accountDAO.getByUsername(account.getUsername())!=null)
+                return false;
             accountDAO.save(account);
             return true;
         }catch(Exception e){

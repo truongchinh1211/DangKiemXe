@@ -119,10 +119,6 @@ public class LoginForm extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Tên đăng nhập hoặc mật khẩu không đúng");
             return;
         }
-        if(!account.isActived()){
-            JOptionPane.showMessageDialog(this, "Tài khoản chưa được kích hoạt bởi quản trị viên");
-            return;
-        }
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         frame.dispose();
         try {

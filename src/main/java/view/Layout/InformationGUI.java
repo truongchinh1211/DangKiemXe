@@ -393,7 +393,7 @@ public class InformationGUI extends javax.swing.JPanel {
         account.setGender(gender);
         account.setBirthDate(birthDate);
         account.setPhone(phone);
-        if(accountBUS.update(account)){
+        if(accountBUS.updateWithoutChangePassword(account)){
             JOptionPane.showMessageDialog(contentPanel2, "Cập nhật thành công!");
             refresh();
             getAccountDetail(account);

@@ -71,6 +71,8 @@ public class MainLayout extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         page5 = new view.custom.HighlightPanel();
         jLabel7 = new javax.swing.JLabel();
+        page6 = new view.custom.HighlightPanel();
+        jLabel8 = new javax.swing.JLabel();
         roundPanel1 = new view.custom.RoundPanel();
         jLabel6 = new javax.swing.JLabel();
         imageAvatar1 = new view.custom.ImageAvatar();
@@ -275,7 +277,7 @@ public class MainLayout extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Phân quyền");
+        jLabel5.setText("Tài khoản");
         jLabel5.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         javax.swing.GroupLayout page4Layout = new javax.swing.GroupLayout(page4);
@@ -315,7 +317,7 @@ public class MainLayout extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Tài khoản");
+        jLabel7.setText("Thông tin cá nhân");
         jLabel7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         javax.swing.GroupLayout page5Layout = new javax.swing.GroupLayout(page5);
@@ -335,6 +337,46 @@ public class MainLayout extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
+        page6.setColor(new java.awt.Color(51, 51, 51));
+        page6.setColorClick(java.awt.Color.gray);
+        page6.setColorOver(new java.awt.Color(255, 255, 204));
+        page6.setPreferredSize(new java.awt.Dimension(232, 89));
+        page6.setRadius(0);
+        page6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                page6MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                page6MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                page6MouseExited(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Tài khoản");
+        jLabel8.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        javax.swing.GroupLayout page6Layout = new javax.swing.GroupLayout(page6);
+        page6.setLayout(page6Layout);
+        page6Layout.setHorizontalGroup(
+            page6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(page6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        page6Layout.setVerticalGroup(
+            page6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, page6Layout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+        );
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -348,7 +390,9 @@ public class MainLayout extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(page5, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(page5, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                    .addComponent(page6, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,7 +406,9 @@ public class MainLayout extends javax.swing.JFrame {
                 .addComponent(page4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(page5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 198, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(page6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 103, Short.MAX_VALUE))
         );
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 25)); // NOI18N
@@ -536,6 +582,18 @@ public class MainLayout extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_page5MouseExited
 
+    private void page6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_page6MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_page6MouseClicked
+
+    private void page6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_page6MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_page6MouseEntered
+
+    private void page6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_page6MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_page6MouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -623,6 +681,7 @@ public class MainLayout extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
@@ -631,6 +690,7 @@ public class MainLayout extends javax.swing.JFrame {
     private view.custom.HighlightPanel page3;
     private view.custom.HighlightPanel page4;
     private view.custom.HighlightPanel page5;
+    private view.custom.HighlightPanel page6;
     private view.custom.Button quitBtn;
     private view.custom.Button quitBtn1;
     private view.custom.RoundPanel roundPanel1;

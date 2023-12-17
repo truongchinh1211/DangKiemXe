@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import models.Owner;
 import models.Transportation;
+import models.TransportationType;
 import org.bson.types.ObjectId;
 
 /**
@@ -40,6 +41,11 @@ public class TransportationDAO {
         String regexPattern = ".*" + Pattern.quote(keyword) + ".*";
         return datastore.find(Transportation.class)
         .field(Transportation.OWNER_FIELD).containsIgnoreCase(keyword).iterator().toList();
+    }
+    public List<Transportation> getByType(ObjectId id) throws Exception{
+        return datastore.find(Transportation.class)
+            .filter(Filters.eq("transportationType", id)).iterator()
+            .toList();
     }
     public void save(Transportation transportation) throws Exception{
         datastore.save(transportation);

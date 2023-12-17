@@ -28,13 +28,12 @@ public class Account {
     public static final String NAME_FIELD = "ho va ten";
     public static final String USERNAME_FIELD = "ten dang nhap";
     public static final String PASSWORD_FIELD = "mat khau";
-    public static final String ROLE_FIELD = "vai tro";
     public static final String EMAIL_FIELD = "email";
     public static final String GENDER_FIELD = "gioi tinh";
     public static final String CREATED_DATE_FIELD = "ngay khoi tao";
     public static final String BIRTHDATE_FIELD = "ngay sinh";
     public static final String PHONE_FIELD = "sdt";
-    public static final String ACTIVE_FIELD = "kich hoat";
+    public static final String ADDRESS_FIELD = "dia chi";
     @Id
     private ObjectId id;
     
@@ -47,7 +46,7 @@ public class Account {
     @Property(PASSWORD_FIELD)
     private String password;
     
-    @Property(ROLE_FIELD)
+    @Reference
     private Role role;
     
     @Property(EMAIL_FIELD)
@@ -65,31 +64,21 @@ public class Account {
     @Property(PHONE_FIELD)
     private String phone;
     
-    @Property(ACTIVE_FIELD)
-    private boolean actived;
+    @Property(ADDRESS_FIELD)
+    private String address;
 
-    public Account(String name,String username, String password, Role role, String email, String gender, String phone,Date birthdate) {
-        this.name=name;
+    public Account(String name, String username, String password, Role role, String email,Date birthDate, String gender, String phone, String address) {
+        this.name = name;
         this.username = username;
         this.password = password;
         this.role = role;
         this.email = email;
+        this.createdDate = new Date();
+        this.birthDate = birthDate;
         this.gender = gender;
         this.phone = phone;
-        this.birthDate = birthdate;
-        this.createdDate = new Date();
-        actived=false;
+        this.address = address;
     }
-    public Account(String name,String username, String password, Role role, String email, String gender, String phone,Date birthdate,boolean actived) {
-        this.name=name;
-        this.username = username;
-        this.password = password;
-        this.role = role;
-        this.email = email;
-        this.gender = gender;
-        this.phone = phone;
-        this.birthDate = birthdate;
-        this.createdDate = new Date();
-        this.actived=actived;
-    }
+
+
 }

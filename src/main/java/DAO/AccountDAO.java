@@ -10,6 +10,7 @@ import dev.morphia.query.experimental.filters.Filters;
 import java.util.List;
 import models.Account;
 import models.Owner;
+import models.Role;
 import org.bson.types.ObjectId;
 
 /**
@@ -30,11 +31,18 @@ public class AccountDAO {
             .filter(Filters.eq("_id", id))
             .first();
     }
+    public List<Account> getByRole(ObjectId id) throws Exception{
+        return datastore.find(Account.class)
+            .filter(Filters.eq("Role", id))
+            .iterator()
+            .toList();
+    }
     public Account getByUsername(String username)throws Exception{
         return datastore.find(Account.class)
                 .filter(Filters.eq(Account.USERNAME_FIELD, username))
                 .first();
     }
+    
     public void save(Account account)throws Exception{
         datastore.save(account);
     }

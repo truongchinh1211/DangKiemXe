@@ -69,7 +69,10 @@ public class TransportationGUI extends javax.swing.JPanel {
             
             nameTxt.setText(transportation.getName());
             yearTxt.setText(transportation.getYear()+"");
-            typeCb.setSelectedItem(transportation.getTransportationType().getName());
+            if(transportation.getTransportationType()!=null)
+                typeCb.setSelectedItem(transportation.getTransportationType().getName());
+            else 
+                typeCb.setSelectedIndex(0);
             licensePlateTxt.setText(transportation.getLicensePlate());
             cmndTxt.setText(transportation.getOwner());
             descriptionTxt.setText(transportation.getDecription());
@@ -82,6 +85,7 @@ public class TransportationGUI extends javax.swing.JPanel {
     public void getTransportationTypeData(){
         Vector Items = new Vector();
         List<TransportationType> transportationTypes = transportationTypeBUS.getAll();
+        Items.add("Chưa xác định");
         for(TransportationType transportationType: transportationTypes)
             Items.add(transportationType.getName());
         typeCb.setModel(new DefaultComboBoxModel(Items));
@@ -101,6 +105,7 @@ public class TransportationGUI extends javax.swing.JPanel {
         nameTxt.setText("");
         yearTxt.setText("");
         licensePlateTxt.setText("");
+        typeCb.setSelectedIndex(0);
         cmndTxt.setText("");
         descriptionTxt.setText("");
     }
@@ -643,6 +648,7 @@ public class TransportationGUI extends javax.swing.JPanel {
         Year year = Year.parse(yearTxt.getText());
         int yearToInt = year.getValue();
         String type = typeCb.getSelectedItem().toString();
+        type = type.equals("Chưa xác định")?null:type;
         String licensePlate = licensePlateTxt.getText();
         TransportationType transportationType = transportationTypeBUS.getByName(type);
         if(transportationType==null){
@@ -679,6 +685,7 @@ public class TransportationGUI extends javax.swing.JPanel {
         Year year = Year.parse(yearTxt.getText());
         int yearToInt = year.getValue();
         String type = typeCb.getSelectedItem().toString();
+        type = type.equals("Chưa xác định")?null:type;
         String licensePlate = licensePlateTxt.getText();
         TransportationType transportationType = transportationTypeBUS.getByName(type);
         if(transportationType==null){

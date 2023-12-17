@@ -4,8 +4,10 @@
  */
 package controllers;
 
+import DAO.TransportationDAO;
 import DAO.TransportationTypeDAO;
 import java.util.List;
+import models.Transportation;
 import models.TransportationType;
 import org.bson.types.ObjectId;
 
@@ -57,6 +59,12 @@ public class TransportationTypeBUS {
     }
     public boolean delete(TransportationType transportationType){
         try{
+            TransportationDAO transportationDAO = new TransportationDAO();
+            List<Transportation> transportations =  transportationDAO.getByType(transportationType.getId());
+            for(Transportation transportation:transportations){
+                transportation.setTransportationType(null);
+                transportationDAO.save(transportation);
+            }
             transportationTypeDAO.Delete(transportationType);
             return true;
         }catch(Exception e){

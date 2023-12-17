@@ -5,17 +5,23 @@
 package view.Layout;
 
 import config.MongoConnection;
+import controllers.AccountBUS;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import models.Account;
 
 /**
  *
  * @author Son
  */
 public class StartGUI extends javax.swing.JFrame {
-    private int flag = 0;
+
+    private final AccountBUS accountBUS;
 
     /**
      * Creates new form StartGUI
@@ -23,7 +29,7 @@ public class StartGUI extends javax.swing.JFrame {
     public StartGUI() {
         initComponents();
         centerLocation();
-        getContent(new LoginForm());
+        accountBUS = new AccountBUS();
     }
 
     /**
@@ -37,10 +43,13 @@ public class StartGUI extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         formTitle = new javax.swing.JLabel();
-        contentPanel6 = new javax.swing.JPanel();
         button = new view.custom.Button();
-        changeTitle = new javax.swing.JLabel();
-        changeBtn = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        lblCategoryIDConfig8 = new javax.swing.JLabel();
+        lblCategoryIDConfig9 = new javax.swing.JLabel();
+        passwordTxt = new view.custom.passwordField();
+        usernameTxt = new view.custom.textField();
+        button5 = new view.custom.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -52,19 +61,6 @@ public class StartGUI extends javax.swing.JFrame {
         formTitle.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         formTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         formTitle.setText("Đăng nhập");
-
-        contentPanel6.setPreferredSize(new java.awt.Dimension(533, 419));
-
-        javax.swing.GroupLayout contentPanel6Layout = new javax.swing.GroupLayout(contentPanel6);
-        contentPanel6.setLayout(contentPanel6Layout);
-        contentPanel6Layout.setHorizontalGroup(
-            contentPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        contentPanel6Layout.setVerticalGroup(
-            contentPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 433, Short.MAX_VALUE)
-        );
 
         button.setBackground(new java.awt.Color(255, 255, 255));
         button.setBorder(null);
@@ -79,38 +75,88 @@ public class StartGUI extends javax.swing.JFrame {
             }
         });
 
-        changeTitle.setText("Chưa có tài khoản ?");
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        changeBtn.setForeground(new java.awt.Color(102, 153, 255));
-        changeBtn.setText("Đăng ký ngay");
-        changeBtn.setBorder(null);
-        changeBtn.setBorderPainted(false);
-        changeBtn.setContentAreaFilled(false);
-        changeBtn.addActionListener(new java.awt.event.ActionListener() {
+        lblCategoryIDConfig8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblCategoryIDConfig8.setText("Tên đăng nhập:");
+
+        lblCategoryIDConfig9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblCategoryIDConfig9.setText("Mật khẩu:");
+
+        passwordTxt.setLabelText("Mật khẩu");
+
+        usernameTxt.setLabelText("Tên đăng nhập");
+
+        button5.setBackground(new java.awt.Color(204, 204, 255));
+        button5.setBorder(null);
+        button5.setText("Đăng nhập");
+        button5.setToolTipText("");
+        button5.setBorderColor(new java.awt.Color(0, 0, 0));
+        button5.setColor(new java.awt.Color(204, 204, 255));
+        button5.setColorClick(new java.awt.Color(240, 235, 235));
+        button5.setColorOver(new java.awt.Color(255, 255, 255));
+        button5.setFocusPainted(false);
+        button5.setRadius(20);
+        button5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                changeBtnActionPerformed(evt);
+                button5ActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblCategoryIDConfig8, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(usernameTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblCategoryIDConfig9, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(passwordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(176, 176, 176)
+                        .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCategoryIDConfig8, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(usernameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCategoryIDConfig9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passwordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(148, 148, 148)
-                .addComponent(changeTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(changeBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(contentPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(formTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(formTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)))
+                        .addComponent(button, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -121,19 +167,15 @@ public class StartGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(formTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contentPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(changeTitle)
-                    .addComponent(changeBtn))
-                .addGap(6, 6, 6))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,29 +190,28 @@ public class StartGUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_buttonActionPerformed
 
-    private void changeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeBtnActionPerformed
-        if(flag==0){
-            getContent(new RegisterForm());
-            formTitle.setText("Đăng ký");
-            changeBtn.setText("Đăng nhập ngay");
-            changeTitle.setText("Đã có tài khoản?");
-            flag=1;
-        }else {
-            getContent(new LoginForm());
-            formTitle.setText("Đăng nhập");
-            changeBtn.setText("Đăng ký ngay");
-            changeTitle.setText("Chưa có tài khoản?");
-            flag=0;
+    private void button5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button5ActionPerformed
+        String username = usernameTxt.getText();
+        String password = passwordTxt.getText();
+        if(username.isBlank()||password.isBlank()){
+            JOptionPane.showConfirmDialog(passwordTxt, "Vui lòng không để trống thông tin");
+            return;
         }
-    }//GEN-LAST:event_changeBtnActionPerformed
+        System.out.println(password);
+        Account account = accountBUS.login(username, password);
+        if(account==null){
+            JOptionPane.showMessageDialog(this, "Tên đăng nhập hoặc mật khẩu không đúng");
+            return;
+        }
+        dispose();
+        try {
+            new MainLayout(account).setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_button5ActionPerformed
 
-    public void getContent(JPanel panel){
-        contentPanel6.removeAll();
-        contentPanel6.setLayout(new BorderLayout());
-        contentPanel6.add(panel,BorderLayout.CENTER);
-        contentPanel6.repaint();
-        contentPanel6.revalidate();
-}
+
     /**
      * @param args the command line arguments
      */
@@ -221,14 +262,13 @@ public class StartGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.custom.Button button;
-    private javax.swing.JButton changeBtn;
-    private javax.swing.JLabel changeTitle;
-    private javax.swing.JPanel contentPanel;
-    private javax.swing.JPanel contentPanel1;
-    private javax.swing.JPanel contentPanel2;
-    private javax.swing.JPanel contentPanel3;
-    private javax.swing.JPanel contentPanel6;
+    private view.custom.Button button5;
     private javax.swing.JLabel formTitle;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblCategoryIDConfig8;
+    private javax.swing.JLabel lblCategoryIDConfig9;
+    private view.custom.passwordField passwordTxt;
+    private view.custom.textField usernameTxt;
     // End of variables declaration//GEN-END:variables
 }
