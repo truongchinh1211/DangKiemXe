@@ -54,7 +54,6 @@ public class AccountGUI extends javax.swing.JPanel {
     public void getRoleOption(){
         Vector Items = new Vector();
         List<Role> roles = roleBUS.getAll();
-        Items.add("Chưa xác định");
         for(Role role: roles)
             Items.add(role.getRoleName());
         roleOption.setModel(new DefaultComboBoxModel(Items));
@@ -71,6 +70,7 @@ public class AccountGUI extends javax.swing.JPanel {
         }
     }
     public void getAccountDetail(Account account){
+        refresh();
         if(account!=null){
             nameTxt.setText(account.getName());
             emailTxt.setText(account.getEmail());
@@ -79,7 +79,10 @@ public class AccountGUI extends javax.swing.JPanel {
             else 
                 femaleOption.setSelected(true);
             phoneTxt.setText(account.getPhone());
-
+            addressTxt.setText(account.getAddress());
+            usernameTxt.setText(account.getUsername());
+            birthdateField.setDate(account.getBirthDate());
+            roleOption.setSelectedItem(account.getRole().getRoleName());
         }
     }
     public void refresh(){
@@ -465,13 +468,7 @@ public class AccountGUI extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addGroup(contentPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(emailTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(contentPanel2Layout.createSequentialGroup()
-                                        .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(lblCategoryIDConfig5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(roleOption, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addComponent(nameTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(lblCategoryIDConfig4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contentPanel2Layout.createSequentialGroup()
@@ -487,14 +484,17 @@ public class AccountGUI extends javax.swing.JPanel {
                                         .addGap(18, 18, 18)
                                         .addComponent(lblCategoryIDConfig10, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(birthdateField, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(birthdateField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(contentPanel2Layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addGroup(contentPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(addressTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addGroup(contentPanel2Layout.createSequentialGroup()
-                                                .addComponent(phoneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE))))))
+                                                .addComponent(phoneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(lblCategoryIDConfig5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(roleOption, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contentPanel2Layout.createSequentialGroup()
                                 .addGroup(contentPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(contentPanel2Layout.createSequentialGroup()
@@ -526,9 +526,7 @@ public class AccountGUI extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(contentPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCategoryIDConfig2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCategoryIDConfig5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(roleOption, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblCategoryIDConfig2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(contentPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCategoryIDConfig1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -544,7 +542,9 @@ public class AccountGUI extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(contentPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(phoneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCategoryIDConfig9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblCategoryIDConfig9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCategoryIDConfig5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(roleOption, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(contentPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -709,7 +709,8 @@ public class AccountGUI extends javax.swing.JPanel {
         if (evt.getClickCount() == 2) {
             JTable target = (JTable) evt.getSource();
             int row = target.getSelectedRow();
-            ObjectId id =(ObjectId) table.getValueAt(row, 4);
+            String idString = table.getValueAt(row, 4).toString();
+            ObjectId id = new ObjectId(idString);
             selectedAccount = accountBUS.getById(id);
             if(selectedAccount==null){
                 JOptionPane.showMessageDialog(contentPanel2, "Có lỗi xảy ra!! tiến hành tải lại trang...");

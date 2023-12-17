@@ -435,12 +435,12 @@ public class TransportationTypeGUI extends javax.swing.JPanel {
             return;
         }
         if(selectedTransportationType!=null){
-            if(transportationTypeBUS.delete(selectedTransportationType))
+            if(transportationTypeBUS.delete(selectedTransportationType)){
                 JOptionPane.showMessageDialog(contentPanel2, "Xóa thành công");
-            
+                refresh();
+            }
             else 
-                JOptionPane.showMessageDialog(contentPanel2,"Có lỗi xảy ra!!Tiến hành tải lại trang...");
-            refresh();
+                JOptionPane.showMessageDialog(contentPanel2,"Vẫn còn dữ liệu xe thuộc dòng xe này!! Không thể xóa");
             getTransportationTypeData();
         }else {
             JOptionPane.showMessageDialog(contentPanel2, "Vui lòng chọn một đối tượng để thao tác");

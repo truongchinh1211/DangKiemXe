@@ -58,15 +58,14 @@ public class RoleBUS {
     }
     public boolean delete(Role role){
         try{
-            AccountDAO accountDAO = new AccountDAO();
-            List<Account> accounts = accountDAO.getByRole(role.getId());
-            for(Account account:accounts){
-                account.setRole(null);
-                accountDAO.save(account);
-            }
+            AccountBUS accountBUS = new AccountBUS();
+            List<Account> accounts = accountBUS.getByRole(role.getId());
+            if(!accounts.isEmpty())
+                return false;
             roleDAO.delete(role);
             return true;
         }catch(Exception e){
+            e.printStackTrace();
             return false;
         }
     }

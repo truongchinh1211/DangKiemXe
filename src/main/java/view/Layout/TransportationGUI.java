@@ -65,8 +65,8 @@ public class TransportationGUI extends javax.swing.JPanel {
         }
     }
     public void getTransportationDetail(Transportation transportation){
+        refresh();
         if(transportation!=null){
-            
             nameTxt.setText(transportation.getName());
             yearTxt.setText(transportation.getYear()+"");
             if(transportation.getTransportationType()!=null)
@@ -85,7 +85,6 @@ public class TransportationGUI extends javax.swing.JPanel {
     public void getTransportationTypeData(){
         Vector Items = new Vector();
         List<TransportationType> transportationTypes = transportationTypeBUS.getAll();
-        Items.add("Chưa xác định");
         for(TransportationType transportationType: transportationTypes)
             Items.add(transportationType.getName());
         typeCb.setModel(new DefaultComboBoxModel(Items));
@@ -102,6 +101,7 @@ public class TransportationGUI extends javax.swing.JPanel {
     
 //
     public void refresh(){
+        getTransportationTypeData();
         nameTxt.setText("");
         yearTxt.setText("");
         licensePlateTxt.setText("");
@@ -653,6 +653,8 @@ public class TransportationGUI extends javax.swing.JPanel {
         TransportationType transportationType = transportationTypeBUS.getByName(type);
         if(transportationType==null){
             JOptionPane.showMessageDialog(parentFrame, "Có lỗi xảy ra ở loại xe, hãy thử tải lại ");
+                getTransportationDetail(selectedTransportation);
+                return;
         }
         String cmnd = cmndTxt.getText();
         if(ownerBUS.getByCmnd(cmnd)==null){
@@ -690,6 +692,8 @@ public class TransportationGUI extends javax.swing.JPanel {
         TransportationType transportationType = transportationTypeBUS.getByName(type);
         if(transportationType==null){
             JOptionPane.showMessageDialog(parentFrame, "Có lỗi xảy ra ở loại xe, hãy thử tải lại ");
+            getTransportationDetail(selectedTransportation);
+            return;
         }
         String cmnd = cmndTxt.getText();
         if(ownerBUS.getByCmnd(cmnd)==null){

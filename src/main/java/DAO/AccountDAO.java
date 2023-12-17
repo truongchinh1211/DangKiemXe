@@ -32,10 +32,16 @@ public class AccountDAO {
             .first();
     }
     public List<Account> getByRole(ObjectId id) throws Exception{
-        return datastore.find(Account.class)
-            .filter(Filters.eq("Role", id))
+        try{
+            return datastore.find(Account.class)
+            .filter(Filters.eq("role", id))
             .iterator()
             .toList();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
     public Account getByUsername(String username)throws Exception{
         return datastore.find(Account.class)

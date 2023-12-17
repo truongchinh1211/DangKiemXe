@@ -61,10 +61,8 @@ public class TransportationTypeBUS {
         try{
             TransportationDAO transportationDAO = new TransportationDAO();
             List<Transportation> transportations =  transportationDAO.getByType(transportationType.getId());
-            for(Transportation transportation:transportations){
-                transportation.setTransportationType(null);
-                transportationDAO.save(transportation);
-            }
+            if(transportations.isEmpty())
+                return false;
             transportationTypeDAO.Delete(transportationType);
             return true;
         }catch(Exception e){

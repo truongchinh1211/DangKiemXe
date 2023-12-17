@@ -246,7 +246,7 @@ public class MainLayout extends javax.swing.JFrame {
             page3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(page3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                 .addContainerGap())
         );
         page3Layout.setVerticalGroup(
@@ -286,7 +286,7 @@ public class MainLayout extends javax.swing.JFrame {
             page4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(page4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                 .addContainerGap())
         );
         page4Layout.setVerticalGroup(
@@ -317,7 +317,7 @@ public class MainLayout extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Thông tin cá nhân");
+        jLabel7.setText("Vai trò");
         jLabel7.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         javax.swing.GroupLayout page5Layout = new javax.swing.GroupLayout(page5);
@@ -354,10 +354,10 @@ public class MainLayout extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Tài khoản");
+        jLabel8.setText("Thông tin tài khoản");
         jLabel8.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         javax.swing.GroupLayout page6Layout = new javax.swing.GroupLayout(page6);
@@ -366,7 +366,7 @@ public class MainLayout extends javax.swing.JFrame {
             page6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(page6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         page6Layout.setVerticalGroup(
@@ -381,8 +381,8 @@ public class MainLayout extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(page4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(page3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(page4, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+            .addComponent(page3, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(page1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -391,8 +391,8 @@ public class MainLayout extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(page5, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                    .addComponent(page6, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)))
+                    .addComponent(page5, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                    .addComponent(page6, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -571,7 +571,7 @@ public class MainLayout extends javax.swing.JFrame {
 
     private void page5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_page5MouseClicked
         active(page5);
-        getContent(new InformationGUI(account));
+        getContent(new RoleGUI(account));
     }//GEN-LAST:event_page5MouseClicked
 
     private void page5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_page5MouseEntered
@@ -583,7 +583,9 @@ public class MainLayout extends javax.swing.JFrame {
     }//GEN-LAST:event_page5MouseExited
 
     private void page6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_page6MouseClicked
-        // TODO add your handling code here:
+
+        active(page6);
+        getContent(new InformationGUI(account));
     }//GEN-LAST:event_page6MouseClicked
 
     private void page6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_page6MouseEntered

@@ -6,25 +6,23 @@ package seeder;
 
 import controllers.AccountBUS;
 import controllers.RoleBUS;
-import java.util.Date;
+import java.util.List;
 import models.Account;
 import models.Role;
 
 /**
  *
- * @author Son
+ * @author Bum
  */
-public class createAdminAccount {
-    
+public class getByRole {
     public static void main(String[] args) {
         AccountBUS accountBUS = new AccountBUS();
         RoleBUS roleBUS = new RoleBUS();
-        Role role = new Role("admin",2,2,2,2);
-        roleBUS.save(role);
-        Account account = new Account("admin", "admin", "admin", role, "example@gmail.com", new Date(),"Nam","0862863753","a");
-        if(accountBUS.save(account)){
-            System.out.println("Tài khoản: admin");
-            System.out.println("Mật khẩu: admin");
+        Role role = roleBUS.getAll().get(0);
+        System.out.println(role.getRoleName());
+        List<Account> accounts = accountBUS.getByRole(role.getId());
+        if(!accounts.isEmpty()){
+            System.out.println("error");
         }
     }
 }

@@ -33,6 +33,13 @@ public class AccountBUS {
             return null;
         }
     }
+    public List<Account> getByRole(ObjectId id){
+        try{
+            return accountDAO.getByRole(id);
+        }catch(Exception e){
+            return null;
+        }
+    }
     public Account login(String username,String password){
         try{
             Account account = accountDAO.getByUsername(username);
@@ -56,6 +63,7 @@ public class AccountBUS {
             accountDAO.save(account);
             return true;
         }catch(Exception e){
+            e.printStackTrace();
             return false;
         }
     }
