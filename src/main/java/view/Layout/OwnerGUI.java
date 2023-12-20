@@ -8,6 +8,7 @@ import controllers.AccountBUS;
 import controllers.OwnerBUS;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -89,6 +90,36 @@ public class OwnerGUI extends javax.swing.JPanel {
         }
         
     }
+    
+    public boolean validateField(){
+        String name = nameTxt.getText();
+        String cmnd = cmndTxt.getText();
+        String gender = genderOption.getSelection()==null?null:maleOption.isSelected()?"Nam":"Nữ";
+        String address = addressTxt.getText();
+        String phone = phoneTxt.getText();
+        String phoneRegex = "^(0[0-9]{9}|\\+84[0-9]{9})$";
+        String cmndRegex = "\\d{12}";
+        Date birthday = birthdateField.getDate();
+        if(name.isBlank() || cmnd.isBlank()||gender==null||address.isBlank()||phone.isBlank()){
+            JOptionPane.showMessageDialog(contentPanel2, "Không được để trống thông tin");
+            return false;
+        }
+        if(birthday.after(new Date())){
+            JOptionPane.showMessageDialog(contentPanel2, "Ngày sinh không hợp lệ");
+            return false;
+        }
+        if(!Pattern.compile(phoneRegex).matcher(phone).matches()){
+            JOptionPane.showMessageDialog(this, "Định dạng số điện thoại 0xxx-xxx-xxx hoặc +84-xxx-xxx-xxx");
+            return false;
+        }
+        if(!Pattern.compile(cmndRegex).matcher(cmnd).matches()){
+            JOptionPane.showMessageDialog(this, "Định dạng số cmnd là 12 số");
+            return false;
+        }
+        return true;
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -647,20 +678,14 @@ public class OwnerGUI extends javax.swing.JPanel {
             return;
         }
         try{
+            if(!validateField())
+                return;
             String name = nameTxt.getText();
             String cmnd = cmndTxt.getText();
             String gender = genderOption.getSelection()==null?null:maleOption.isSelected()?"Nam":"Nữ";
             String address = addressTxt.getText();
             String phone = phoneTxt.getText();
             Date birthday = birthdateField.getDate();
-            if(name.isBlank() || cmnd.isBlank()||gender.isBlank()||address.isBlank()||phone.isBlank()){
-                JOptionPane.showMessageDialog(contentPanel2, "Không được để trống thông tin");
-                return;
-            }
-            if(birthday.after(new Date())){
-                JOptionPane.showMessageDialog(contentPanel2, "Ngày sinh không hợp lệ");
-                return;
-            }
             Owner createOwner = new Owner(name, birthday, cmnd, address, phone, gender);
             if(ownerBUS.save(createOwner)){
                 JOptionPane.showMessageDialog(contentPanel2, "Thêm thành công!!");
@@ -717,20 +742,14 @@ public class OwnerGUI extends javax.swing.JPanel {
             return;
         }
         try{
+            if(!validateField())
+                return;
             String name = nameTxt.getText();
             String cmnd = cmndTxt.getText();
             String gender = genderOption.getSelection()==null?null:maleOption.isSelected()?"Nam":"Nữ";
             String address = addressTxt.getText();
             String phone = phoneTxt.getText();
             Date birthday = birthdateField.getDate();
-            if(name.isBlank() || cmnd.isBlank()||gender==null||address.isBlank()||phone.isBlank()){
-                JOptionPane.showMessageDialog(contentPanel2, "Không được để trống thông tin");
-                return;
-            }
-            if(birthday.after(new Date())){
-                JOptionPane.showMessageDialog(contentPanel2, "Ngày sinh không hợp lệ");
-                return;
-            }
             selectedOwner.setFullName(name);
             selectedOwner.setAddress(address);
             selectedOwner.setBirthday(birthday);

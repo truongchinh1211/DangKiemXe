@@ -182,6 +182,7 @@ public class AccountGUI extends javax.swing.JPanel {
         passwordField = new view.custom.passwordField();
         lblCategoryIDConfig5 = new javax.swing.JLabel();
         roleOption = new javax.swing.JComboBox<>();
+        button7 = new view.custom.Button();
 
         setPreferredSize(new java.awt.Dimension(1266, 550));
 
@@ -434,6 +435,23 @@ public class AccountGUI extends javax.swing.JPanel {
 
         roleOption.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        button7.setBackground(new java.awt.Color(204, 204, 255));
+        button7.setBorder(null);
+        button7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/remove.png"))); // NOI18N
+        button7.setText("Xóa");
+        button7.setToolTipText("");
+        button7.setBorderColor(new java.awt.Color(0, 0, 0));
+        button7.setColor(new java.awt.Color(204, 204, 255));
+        button7.setColorClick(new java.awt.Color(240, 235, 235));
+        button7.setColorOver(new java.awt.Color(255, 255, 255));
+        button7.setFocusPainted(false);
+        button7.setRadius(20);
+        button7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout contentPanel2Layout = new javax.swing.GroupLayout(contentPanel2);
         contentPanel2.setLayout(contentPanel2Layout);
         contentPanel2Layout.setHorizontalGroup(
@@ -482,7 +500,7 @@ public class AccountGUI extends javax.swing.JPanel {
                                         .addGap(18, 18, 18)
                                         .addComponent(lblCategoryIDConfig10, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(birthdateField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(birthdateField, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
                                     .addGroup(contentPanel2Layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addGroup(contentPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -494,19 +512,21 @@ public class AccountGUI extends javax.swing.JPanel {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(roleOption, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contentPanel2Layout.createSequentialGroup()
-                                .addGroup(contentPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(contentPanel2Layout.createSequentialGroup()
+                                .addGroup(contentPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contentPanel2Layout.createSequentialGroup()
                                         .addGap(6, 6, 6)
                                         .addComponent(lblCategoryIDConfig12, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(contentPanel2Layout.createSequentialGroup()
-                                        .addGap(145, 145, 145)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, contentPanel2Layout.createSequentialGroup()
+                                        .addGap(80, 80, 80)
                                         .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 92, Short.MAX_VALUE)))
-                        .addGap(94, 94, 94))))
+                                        .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(button7, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(67, 67, 67))))
         );
         contentPanel2Layout.setVerticalGroup(
             contentPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -563,7 +583,8 @@ public class AccountGUI extends javax.swing.JPanel {
                         .addGroup(contentPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(button5, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(button7, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(8, 8, 8)))
                 .addContainerGap())
         );
@@ -727,6 +748,28 @@ public class AccountGUI extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tableMouseClicked
 
+    private void button7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button7ActionPerformed
+       if(accountBUS.getById(account.getId()).getRole().getOwnerManager()!=2){
+            JOptionPane.showMessageDialog(contentPanel2, "Bạn không có quyền thao tác");
+            return;
+        }
+       if(selectedAccount.getId().equals(account.getId())){
+           JOptionPane.showMessageDialog(contentPanel2, "Không thể tự xóa tài khoản của chính mình");
+           return;
+       }
+       if(selectedAccount==null){
+           JOptionPane.showMessageDialog(contentPanel2, "Vui lòng chọn một đối tượng để thao tác");
+           return;
+       }
+       if(accountBUS.delete(selectedAccount)){
+           JOptionPane.showMessageDialog(contentPanel2, "Xóa thành công");
+           refresh();
+       }else
+           JOptionPane.showMessageDialog(contentPanel2, "Có lỗi xảy ra!!");
+       getAccountsData();
+       
+    }//GEN-LAST:event_button7ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.custom.textField addressTxt;
@@ -735,6 +778,7 @@ public class AccountGUI extends javax.swing.JPanel {
     private view.custom.Button button4;
     private view.custom.Button button5;
     private view.custom.Button button6;
+    private view.custom.Button button7;
     private javax.swing.JPanel contentPanel2;
     private view.custom.textField emailTxt;
     private javax.swing.JRadioButton femaleOption;
